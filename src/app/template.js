@@ -21,6 +21,8 @@ import {
 import { Search } from '@/components/layout/search'
 import { UserNav } from '@/components/layout/usernav'
 
+import useStore from '@/store/uiStore'
+
 const navigation = [
   { name: 'Dashboard', href: '/', icon: HomeIcon, current: true },
   { name: 'About', href: '/about', icon: UsersIcon, current: false },
@@ -45,8 +47,11 @@ function classNames(...classes) {
 }
 
 export default function Template({ children }) {
-  const [sidebarOpen, setSidebarOpen] = useState(false)
-  const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false)
+  const sidebarOpen = useStore((state) => state.sidebarOpen)
+  const isSidebarCollapsed = useStore((state) => state.isSidebarCollapsed)
+  const setSidebarOpen = useStore((state) => state.setSidebarOpen)
+  const setIsSidebarCollapsed = useStore((state) => state.setIsSidebarCollapsed)
+
   const pathname = usePathname()
 
   const handleToggleSidebar = () => {
